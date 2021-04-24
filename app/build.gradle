@@ -17,7 +17,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'io.github.chao2zhang.logginglivedata'
+apply plugin: 'io.github.chao2zhang.livedatadebugger'
 
 android {
     compileSdkVersion build_versions.compile_sdk

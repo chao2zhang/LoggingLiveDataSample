@@ -79,7 +79,7 @@ activity.activity_ktx = "androidx.activity:activity-ktx:$versions.activity"
 deps.activity = activity
 
 deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
-deps.logging_live_data = "io.github.chao2zhang.logginglivedata:logginglivedata:0.0.1"
+deps.live_data_debugger = "io.github.chao2zhang.livedatadebugger:livedatadebugger:0.0.3"
 
 deps.annotations = "androidx.annotation:annotation:$versions.annotations"
 

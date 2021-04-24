@@ -16,6 +16,7 @@
 package com.android.example.livedatabuilder
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
@@ -37,10 +38,7 @@ class LiveDataViewModel(
     val currentTime = dataSource.getCurrentTime()
 
     // Coroutines inside a transformation
-    val currentTimeTransformed = currentTime.switchMap {
-        // timeStampToTime is a suspend function so we need to call it from a coroutine.
-        liveData { emit(timeStampToTime(it)) }
-    }
+    val currentTimeTransformed = MutableLiveData<String>()
 
     // Exposed liveData that emits and single value and subsequent values from another source.
     val currentWeather: LiveData<String> = liveData {
@@ -53,17 +51,11 @@ class LiveDataViewModel(
 
     // Called when the user clicks on the "FETCH NEW DATA" button. Updates value in data source.
     fun onRefresh() {
+        currentTimeTransformed.postValue("New")
         // Launch a coroutine that reads from a remote data source and updates cache
         viewModelScope.launch {
             dataSource.fetchNewData()
         }
-    }
-
-    // Simulates a long-running computation in a background thread
-    private suspend fun timeStampToTime(timestamp: Long): String {
-        delay(500)  // Simulate long operation
-        val date = Date(timestamp)
-        return date.toString()
     }
 
     companion object {
